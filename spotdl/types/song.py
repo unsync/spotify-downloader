@@ -3,6 +3,7 @@ Song module that hold the Song and SongList classes.
 """
 
 import json
+import logging
 from dataclasses import asdict, dataclass
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -11,7 +12,7 @@ from rapidfuzz import fuzz
 from spotdl.utils.spotify import SpotifyClient
 
 __all__ = ["Song", "SongList", "SongError"]
-
+logger = logging.getLogger(__name__)
 
 class SongError(Exception):
     """
@@ -81,8 +82,9 @@ class Song:
         spotify_client = SpotifyClient()
 
         # get track info
+        logger.debug("get song data %s", url)
         raw_track_meta = spotify_client.track(url)
-
+        logger.debug("got song data %s", url)
         if raw_track_meta is None:
             raise SongError(
                 "Couldn't get metadata, check if you have passed correct track id"

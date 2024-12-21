@@ -106,6 +106,7 @@ class Singleton(type):
                 scope="user-library-read,user-follow-read,playlist-read-private",
                 cache_handler=cache_handler,
                 open_browser=not headless,
+                requests_timeout=10,
             )
         # Use SpotifyClientCredentials as auth manager
         else:
@@ -113,6 +114,7 @@ class Singleton(type):
                 client_id=client_id,
                 client_secret=client_secret,
                 cache_handler=cache_handler,
+                requests_timeout=10,
             )
         if auth_token is not None:
             credential_manager = None
@@ -127,6 +129,10 @@ class Singleton(type):
             auth=auth_token,
             auth_manager=credential_manager,
             status_forcelist=(429, 500, 502, 503, 504, 404),
+            retries=0,
+            status_retries=0,
+            requests_timeout=5,
+            backoff_factor=1,
         )
 
         # Return instance
