@@ -82,9 +82,9 @@ class Song:
         spotify_client = SpotifyClient()
 
         # get track info
-        logger.debug("get song data %s", url)
+        # logger.debug("get song data %s", url)
         raw_track_meta = spotify_client.track(url)
-        logger.debug("got song data %s", url)
+        # logger.debug("got song data %s", url)
         if raw_track_meta is None:
             raise SongError(
                 "Couldn't get metadata, check if you have passed correct track id"

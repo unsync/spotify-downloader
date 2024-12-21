@@ -7,13 +7,14 @@ To use this module you must first initialize the SpotifyClient.
 
 import concurrent.futures
 import json
+import logging
 import re
-import requests
 from pathlib import Path
 from typing import Dict, List, Optional
+
+import requests
 from ytmusicapi import YTMusic
 
-import logging
 from spotdl.types.album import Album
 from spotdl.types.artist import Artist
 from spotdl.types.playlist import Playlist
