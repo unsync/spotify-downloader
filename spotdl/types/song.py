@@ -84,7 +84,6 @@ class Song:
         # get track info
         # logger.debug("get song data %s", url)
         raw_track_meta = spotify_client.track(url)
-        # logger.debug("got song data %s", url)
         if raw_track_meta is None:
             raise SongError(
                 "Couldn't get metadata, check if you have passed correct track id"
@@ -92,6 +91,8 @@ class Song:
 
         if raw_track_meta["duration_ms"] == 0 or raw_track_meta["name"].strip() == "":
             raise SongError(f"Track no longer exists: {url}")
+
+        logger.debug("Fetched song data: '%s' - '%s'", raw_track_meta["artists"][0]["name"], raw_track_meta["name"])
 
         # get artist info
         primary_artist_id = raw_track_meta["artists"][0]["id"]
